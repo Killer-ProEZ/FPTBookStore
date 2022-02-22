@@ -32,7 +32,17 @@ namespace FPTBookStore.Controllers
             var data = db.Books.ToList();
             return View(data);
         }
-
+        [HttpPost]
+        public ActionResult Index(string searchstring)
+        {
+            List<Book> data = new List<Book>();
+            data = db.Books.Where(x => x.BookName.Contains(searchstring)).ToList();
+            if (data==null)
+            {
+                return HttpNotFound();
+            }
+            return View(data);
+        }
         public ActionResult About()
         {
 
@@ -53,12 +63,29 @@ namespace FPTBookStore.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (username.Equals("") || password.Equals(""))
+                {
+                    ViewBag.Error = "Username or password can't empty";
+                    return View("Login");
+                }
                 var c_password = GetMD5(password);
                 var data = db.Accounts.Where(s => s.UserName.Equals(username) && s.Password.Equals(c_password)).ToList();
                 if (data.Count() > 0)
                 {
-                    TempData["UserName"] = data.FirstOrDefault().UserName;
-                    return RedirectToAction("Index");
+                    if (data.FirstOrDefault().State == 0)
+                    {
+                        Session["UserName"] = data.FirstOrDefault().UserName.ToString();
+                        if (TempData["No"] != null)
+                        {
+                            Session["No"] = 1;
+                        }
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        Session["Admin"] = data.FirstOrDefault().UserName.ToString();
+                        return RedirectToAction("Index","Admin");
+                    }
                 }
                 else
                 {
@@ -71,7 +98,7 @@ namespace FPTBookStore.Controllers
         }
         public ActionResult Logout()
         {
-            TempData["UserName"] = null;
+            Session.Clear();
             return RedirectToAction("Index");
         }
         public ActionResult Register()
@@ -84,8 +111,9 @@ namespace FPTBookStore.Controllers
         {
             if (ModelState.IsValid)
             {
-                var check = db.Accounts.FirstOrDefault(x => x.Email == account.Email);
-                if(check == null)
+                var checkEmail = db.Accounts.FirstOrDefault(x => x.Email == account.Email);
+                var checkUserName = db.Accounts.FirstOrDefault(x => x.UserName == account.UserName);
+                if (checkEmail == null && checkUserName==null)
                 {
                     account.Password = GetMD5(account.Password);
                     account.RePassword = GetMD5(account.RePassword);
@@ -121,19 +149,45 @@ namespace FPTBookStore.Controllers
             return View(book);
         }
 
-        public ActionResult Cart()
+        public ActionResult Edit()
         {
-            return View();
-        }
-
-        public ActionResult Search()
-        {
-            return View("Index");
+            if (Session["No"]==null)
+            {
+                Session["infor"] = "You must re-enter before updating personal information";
+                TempData["No"] = 1;
+                return RedirectToAction("Login");
+            }
+            var user = Convert.ToString(Session["UserName"]);
+            var account = db.Accounts.FirstOrDefault(x => x.UserName.Equals(user));
+            if (account == null)
+            {
+                return HttpNotFound();
+            }
+            return View(account);
         }
         [HttpPost]
-        public ActionResult Search(string searchstring)
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(Account account)
         {
-            return View();
+            var user = Convert.ToString(Session["UserName"]);
+            var reaccount = db.Accounts.FirstOrDefault(x => x.UserName.Equals(user));
+            if (account == null)
+            {
+                return HttpNotFound();
+            }
+            else
+            {
+                reaccount.Address = account.Email;
+                reaccount.Fullname = account.Fullname;
+                reaccount.Password = GetMD5(account.Password);
+                reaccount.RePassword = GetMD5(account.RePassword);
+                reaccount.Tel = account.Tel;
+                reaccount.Email = account.Email;
+                reaccount.State = 0;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View("Index");
         }
     }
 }

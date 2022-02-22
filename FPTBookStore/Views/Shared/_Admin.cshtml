@@ -10,7 +10,6 @@
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/dashboard/">
     <link href="~/Content/css/dashboard.css" />
     <link href="~/Content/css/dashboard.rtl.css" />
-    <link href="~/Content/bootstrap.min.css" />
 
     <style>
         .bd-placeholder-img {
@@ -32,48 +31,48 @@
         
         <div class="navbar-nav">
             <div class="nav-item text-nowrap">
-                <a class="nav-link px-3" href="#">Sign out</a>
+                @Html.ActionLink("Sign Out","Logout","Home",new { @class= "nav-link px-3" })
             </div>
         </div>
     </header>
 
     <div class="container-fluid">
         <div class="row">
-            <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse side-color">
+            <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-secondary sidebar collapse side-color" style="height: auto !important">
                 <div class="position-sticky pt-3">
                     <ul class="nav flex-column">
-                        <li class="nav-item text-black">
-                            <a class="nav-link" aria-current="page" href="#">
+                        <li class="nav-item">
+                            <a class="nav-link text-white" aria-current="page" href="@Url.Action("Index","Admin")">
                                 <span><i class="fa-solid fa-house"></i></span>
                                 Dashboard
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link text-white" href="@Url.Action("Index","Order")">
                                 <span><i class="fa-solid fa-clipboard-list"></i></span>
                                 Orders
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link text-white" href="@Url.Action("Index","Orderdetail")">
                                 <span><i class="fa-solid fa-list"></i></span>
                                 Orderdetails
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link text-white" href="@Url.Action("Index","Book")">
                                 <span><i class="fa-solid fa-book"></i></span>
                                 Books
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link text-white" href="@Url.Action("Index","Account")">
                                 <span><i class="fa-solid fa-user"></i></span>
                                 Account
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link text-white" href="@Url.Action("Index","Report")">
                                 <span><i class="fa-solid fa-chart-line"></i></span>
                                 Reports
                             </a>

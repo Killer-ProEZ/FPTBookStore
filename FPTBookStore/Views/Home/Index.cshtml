@@ -57,11 +57,12 @@
             {
                 <div class="search-content">
                     <div class="input-block">
-                        <input type="text" class="form-control">
-                        @Html.TextBox(new { @class= "form-control" })
+                        @*<input type="text" class="form-control">*@
+                        @Html.TextBox("searchstring","",new { @class= "form-control", type="text" })
                     </div>
                     <div class="button-block">
-                        <button class="btn btn-info"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        @*<button type="submit" class="btn btn-info"><i class="fa-solid fa-magnifying-glass"></i></button>*@
+                        <input type="submit" class="btn btn-info" value="Search"/>
                     </div>
                 </div>
             }

@@ -36,13 +36,24 @@
                     <label for="drop" class="toggle">Menu</label>
                     <input type="checkbox" id="drop" />
                     <ul class="menu mt-2">
-                        <
-                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                        <li>@Html.ActionLink("About", "About", "Home")</li>
-                        <li>@Html.ActionLink("Help", "Help", "Home")</li>
-                        <li>@Html.ActionLink("Login", "Login", "Home")</li>
-                        <li>@Html.ActionLink("Register", "Register", "Home")</li>
-                        <li>@Html.ActionLink("Cart", "Cart", "Cart")</li>
+                        @if (Session["UserName"] != null)
+                        {
+                            <li>@Html.ActionLink("Home", "Index")</li>
+                            <li>@Html.ActionLink("About", "About")</li>
+                            <li>@Html.ActionLink("Help", "Help")</li>
+                            <li>@Html.ActionLink($"Hi {Session["UserName"]}", "Edit", "Home")</li>
+                            <li>@Html.ActionLink("Logout", "Logout")</li>
+                            <li>@Html.ActionLink("Cart", "Cart")</li>
+                        }
+                        else
+                        {
+                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                            <li>@Html.ActionLink("About", "About", "Home")</li>
+                            <li>@Html.ActionLink("Help", "Help", "Home")</li>
+                            <li>@Html.ActionLink("Login", "Login", "Home")</li>
+                            <li>@Html.ActionLink("Register", "Register", "Home")</li>
+                            <li>@Html.ActionLink("Cart", "Cart", "Cart")</li>
+                        }
                     </ul>
                 </nav>
                 <!-- //nav -->

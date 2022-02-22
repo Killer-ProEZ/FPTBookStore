@@ -36,14 +36,14 @@
                     <label for="drop" class="toggle">Menu</label>
                     <input type="checkbox" id="drop" />
                     <ul class="menu mt-2">
-                        @if (TempData["UserName"] != null)
+                        @if (Session["UserName"] != null)
                         {
-                                <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                                <li>@Html.ActionLink("About", "About", "Home")</li>
-                                <li>@Html.ActionLink("Help", "Help", "Home")</li>
-                                <li>@Html.ActionLink($"Hi {TempData["UserName"]}", "Login", "Home")</li>
-                                <li>@Html.ActionLink("Logout", "Logout", "Home")</li>
-                                <li>@Html.ActionLink("Cart", "Cart", "Cart")</li>
+                                <li>@Html.ActionLink("Home", "Index")</li>
+                                <li>@Html.ActionLink("About", "About")</li>
+                                <li>@Html.ActionLink("Help", "Help")</li>
+                                <li>@Html.ActionLink($"Hi {Session["UserName"]}", "Edit", "Home")</li>
+                                <li>@Html.ActionLink("Logout", "Logout")</li>
+                                <li>@Html.ActionLink("Cart", "Cart")</li>
                         }
                         else
                         {
@@ -87,7 +87,7 @@
                         <div class="row mt-lg-4 bottom-w3layouts-sec-nav mx-0">
                             <div class="col-md-4 footer-grid_section_w3layouts">
                                 <h3 class="footer-title text-uppercase text-wh mb-lg-4 mb-3">Information</h3>
-                                @if (TempData["UserName"] != null)
+                                @if (Session["UserName"] != null)
                                 {
                                     <ul class="list-unstyled w3layouts-icons">
                                         <li>
@@ -100,7 +100,7 @@
                                             @Html.ActionLink("Help", "Help")
                                         </li>
                                         <li class="mt-3">
-                                            @Html.ActionLink($"Hi {TempData["UserName"]}", "Index")
+                                            @Html.ActionLink($"Hi {Session["UserName"]}", "Index")
                                         </li>
                                         <li class="mt-3">
                                             @Html.ActionLink("Logout", "Logout")
