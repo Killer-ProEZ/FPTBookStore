@@ -15,13 +15,14 @@
     <h2>Books</h2>
     <div class="add-block mt-2">
         <div class="d-flex justify-content-between mb-2">
-            <a class="btn btn-primary" href=""><i class="fa-solid fa-plus"></i>  Add Books</a>
-            <form>
+            <a class="btn btn-primary" href="@Url.Action("Create")"><i class="fa-solid fa-plus"></i>  Add Books</a>
+            @using (Html.BeginForm())
+            {
                 <div class="d-flex justify-content-between">
-                    <input class="form-control mr-2" type="text">
+                    @Html.TextBox("searching","",new { @class= "form-control mr-2", type = "text" })
                     <input type="submit" value="Search" class="btn btn-primary">
                 </div>
-            </form>
+            }
         </div>
     </div>
     <div class="table-responsive mt-2">
@@ -46,8 +47,8 @@
                         <td>@book.Price</td>
                         <td>@book.Stock</td>
                         <td>@book.Date_add</td>
-                        <td><a href="@Url.Action("Edit","Admin",new { id=book.BookID})"><i class="fa-solid fa-pen-to-square"></i>Edit</a></td>
-                        <td><a href="@Url.Action("Delete","Admin",new { id=book.BookID})"><i class="fa-solid fa-trash-can"></i>Delete</a></td>
+                        <td><a href="@Url.Action("Edit","Book",new { id=book.BookID})"><i class="fa-solid fa-pen-to-square"></i>Edit</a></td>
+                        <td><a onclick="return confirm('Are you sure ?')" href="@Url.Action("Delete","Book",new { id=book.BookID})"><i class="fa-solid fa-trash-can"></i>Delete</a></td>
                     </tr>
                 }
             </tbody>

@@ -15,7 +15,7 @@
     <h2>Category</h2>
     <div class="add-block  mt-2">
         <div class="d-flex justify-content-between mb-2">
-            <a class="btn btn-primary" href=""><i class="fa-solid fa-plus"></i>  Add Category</a>
+            <a class="btn btn-primary" href="@Url.Action("Create")"><i class="fa-solid fa-plus"></i>  Add Category</a>
             <form>
                 <div class="d-flex justify-content-between">
                     <input class="form-control mr-2" type="text">
@@ -40,8 +40,8 @@
                     <tr>
                         <td>@category.CategoryID</td>
                         <td>@category.CategoryName</td>
-                        <td><a href="@Url.Action("Edit","Admin",new { id=category.CategoryID})"><i class="fa-solid fa-pen-to-square"></i>Edit</a></td>
-                        <td><a href="@Url.Action("Delete","Admin",new { id=category.CategoryID})"><i class="fa-solid fa-trash-can"></i>Delete</a></td>
+                        <td><a href="@Url.Action("Edit","Category",new { id=category.CategoryID})"><i class="fa-solid fa-pen-to-square"></i>Edit</a></td>
+                        <td><a onclick="return confirm('Are you sure ?')" href="@Url.Action("Delete","Category",new { id=category.CategoryID})"><i class="fa-solid fa-trash-can"></i>Delete</a></td>
                     </tr>
                 }
             </tbody>

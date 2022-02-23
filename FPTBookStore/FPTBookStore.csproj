@@ -139,9 +139,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202202191638449_sevenRun.cs" />
-    <Compile Include="Migrations\202202191638449_sevenRun.designer.cs">
-      <DependentUpon>202202191638449_sevenRun.cs</DependentUpon>
+    <Compile Include="Migrations\202202230458282_FistRun.cs" />
+    <Compile Include="Migrations\202202230458282_FistRun.Designer.cs">
+      <DependentUpon>202202230458282_FistRun.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Author.cs" />
@@ -250,6 +250,13 @@
     <Content Include="Views\Order\Index.cshtml" />
     <Content Include="Views\Orderdetail\Index.cshtml" />
     <Content Include="Views\Account\Create.cshtml" />
+    <Content Include="Views\Account\Edit.cshtml" />
+    <Content Include="Views\Author\Create.cshtml" />
+    <Content Include="Views\Author\Edit.cshtml" />
+    <Content Include="Views\Category\Create.cshtml" />
+    <Content Include="Views\Category\Edit.cshtml" />
+    <Content Include="Views\Book\Create.cshtml" />
+    <Content Include="Views\Book\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -268,8 +275,8 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202202191638449_sevenRun.resx">
-      <DependentUpon>202202191638449_sevenRun.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202202230458282_FistRun.resx">
+      <DependentUpon>202202230458282_FistRun.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

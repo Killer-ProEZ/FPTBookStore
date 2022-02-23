@@ -29,12 +29,14 @@ namespace FPTBookStore.Controllers
         }
         public ActionResult Index()
         {
+            Session["Admin"] = null;
             var data = db.Books.ToList();
             return View(data);
         }
         [HttpPost]
         public ActionResult Index(string searchstring)
         {
+            Session["Admin"] = null;
             List<Book> data = new List<Book>();
             data = db.Books.Where(x => x.BookName.Contains(searchstring)).ToList();
             if (data==null)
@@ -45,16 +47,18 @@ namespace FPTBookStore.Controllers
         }
         public ActionResult About()
         {
-
+            Session["Admin"] = null;
             return View();
         }
 
         public ActionResult Help()
         {
+            Session["Admin"] = null;
             return View();
         }
         public ActionResult Login()
         {
+            Session["Admin"] = null;
             return View();
         }
         [HttpPost]
@@ -103,6 +107,7 @@ namespace FPTBookStore.Controllers
         }
         public ActionResult Register()
         {
+            Session["Admin"] = null;
             return View();
         }
         [HttpPost]
@@ -134,6 +139,7 @@ namespace FPTBookStore.Controllers
         }
         public ActionResult Details(int? id)
         {
+            Session["Admin"] = null;
             var book = db.Books.FirstOrDefault(x => x.BookID == id);
             if (book == null)
             {
@@ -151,6 +157,7 @@ namespace FPTBookStore.Controllers
 
         public ActionResult Edit()
         {
+            Session["Admin"] = null;
             if (Session["No"]==null)
             {
                 Session["infor"] = "You must re-enter before updating personal information";
@@ -191,3 +198,4 @@ namespace FPTBookStore.Controllers
         }
     }
 }
+

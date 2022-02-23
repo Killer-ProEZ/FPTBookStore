@@ -15,7 +15,6 @@
     <h2>Orderdeatils</h2>
     <div class="add-block  mt-2">
         <div class="d-flex justify-content-between mb-2">
-            <a class="btn btn-primary" href=""><i class="fa-solid fa-plus"></i>  Add Orderdetail</a>
             <form>
                 <div class="d-flex justify-content-between">
                     <input class="form-control mr-2" type="text">
@@ -30,7 +29,6 @@
                 <tr>
                     <th scope="col">OrderdetailID</th>
                     <th scope="col">Price</th>
-                    <th scope="col">Update</th>
                     <th scope="col">Delete</th>
                 </tr>
             </thead>
@@ -40,8 +38,7 @@
                     <tr>
                         <td>@orderdetail.OrderdetailsID</td>
                         <td>@orderdetail.Price</td>
-                        <td><a href="@Url.Action("Edit","Admin",new { id=orderdetail.OrderdetailsID})"><i class="fa-solid fa-pen-to-square"></i>Edit</a></td>
-                        <td><a href="@Url.Action("Delete","Admin",new { id=orderdetail.OrderdetailsID})"><i class="fa-solid fa-trash-can"></i>Delete</a></td>
+                        <td><a onclick="return confirm('Are you sure ?')" href="@Url.Action("Delete","Admin",new { id=orderdetail.OrderdetailsID})"><i class="fa-solid fa-trash-can"></i>Delete</a></td>
                     </tr>
                 }
             </tbody>

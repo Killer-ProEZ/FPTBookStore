@@ -46,8 +46,8 @@
                         <td>@account.Email</td>
                         <td>@account.Tel</td>
                         <td>@account.Address</td>
-                        <td><a href="@Url.Action("Edit","Admin",new { id=account.UserName})"><i class="fa-solid fa-pen-to-square"></i>Edit</a></td>
-                        <td><a href="@Url.Action("Delete","Admin",new { id=account.UserName})"><i class="fa-solid fa-trash-can"></i>Delete</a></td>
+                        <td><a href="@Url.Action("Edit","Account",new { username=account.UserName})"><i class="fa-solid fa-pen-to-square"></i>Edit</a></td>
+                        <td><a  onclick="return confirm('Are you sure ?')" href="@Url.Action("Delete","Account",new { username=account.UserName})"><i class="fa-solid fa-trash-can"></i>Delete</a></td>
                     </tr>
                 }
             </tbody>

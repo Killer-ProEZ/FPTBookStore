@@ -13,25 +13,26 @@ namespace FPTBookStore.Controllers
         private MyApplicationDBContext db = new MyApplicationDBContext();
         public ActionResult Index()
         {
-            if (Session["Admin"] != null)
+            if (Session["Admin"] == null)
             {
-                var orders = db.Orders.ToList();
-                var numberOrder = db.Orders.ToList().Count();
-                int revenue = 0;
-                foreach (var order in orders)
-                {
-                    revenue = +order.TotalPrice;
-                }
-                var user = db.Accounts.ToList().Count();
-                var books = db.Books.ToList().Count();
-                var bookdata = db.Books.ToList().OrderByDescending(x => x.BookID);
-                ViewBag.users = user;
-                ViewBag.books = books;
-                ViewBag.revenue = revenue;
-                ViewBag.orders = numberOrder;
-                return View(bookdata);
+                Session["UserName"] = null;
+                return RedirectToAction("Login","Home");
             }
-            return View("Login");
+            var orders = db.Orders.ToList();
+            var numberOrder = db.Orders.ToList().Count();
+            int revenue = 0;
+            foreach (var order in orders)
+            {
+                revenue = +order.TotalPrice;
+            }
+            var user = db.Accounts.ToList().Count();
+            var books = db.Books.ToList().Count();
+            var bookdata = db.Books.ToList().OrderByDescending(x => x.BookID);
+            ViewBag.users = user;
+            ViewBag.books = books;
+            ViewBag.revenue = revenue;
+            ViewBag.orders = numberOrder;
+            return View(bookdata);
         }
     }
 }
