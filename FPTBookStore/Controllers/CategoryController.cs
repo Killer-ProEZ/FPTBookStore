@@ -37,6 +37,12 @@ namespace FPTBookStore.Controllers
         {
             if (ModelState.IsValid)
             {
+                var checkcategory = db.Categories.Where(x => x.CategoryName == category.CategoryName).FirstOrDefault();
+                if (checkcategory != null)
+                {
+                    ViewBag.Error = "CategoryName is exits";
+                    return RedirectToAction("Create");
+                }
                 if (category == null)
                 {
                     return HttpNotFound();

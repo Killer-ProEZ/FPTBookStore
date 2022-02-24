@@ -139,13 +139,14 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202202230458282_FistRun.cs" />
-    <Compile Include="Migrations\202202230458282_FistRun.Designer.cs">
-      <DependentUpon>202202230458282_FistRun.cs</DependentUpon>
+    <Compile Include="Migrations\202202240440034_ElevenRun.cs" />
+    <Compile Include="Migrations\202202240440034_ElevenRun.Designer.cs">
+      <DependentUpon>202202240440034_ElevenRun.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Author.cs" />
     <Compile Include="Models\Book.cs" />
+    <Compile Include="Models\Cart.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\Account.cs" />
@@ -275,8 +276,8 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202202230458282_FistRun.resx">
-      <DependentUpon>202202230458282_FistRun.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202202240440034_ElevenRun.resx">
+      <DependentUpon>202202240440034_ElevenRun.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -41,6 +41,12 @@ namespace FPTBookStore.Controllers
         {
             if (ModelState.IsValid)
             {
+                var checkauthor = db.Authors.Where(x => x.AuthorName == author.AuthorName).FirstOrDefault();
+                if (checkauthor != null)
+                {
+                    ViewBag.Error = "CategoryName is exits";
+                    return RedirectToAction("Create");
+                }
                 if (author == null)
                 {
                     return HttpNotFound();

@@ -2,6 +2,7 @@
 using FPTBookStore.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -31,7 +32,7 @@ namespace FPTBookStore.Controllers
                 return RedirectToAction("Login", "Home");
             }
             List<Book> data = new List<Book>();
-            data = db.Books.Where(x => x.BookName.Contains(searchstring)).ToList();
+            data = db.Books.Where(x => x.BookName.ToLower().Contains(searchstring.ToLower())).ToList();
             if (data == null)
             {
                 return HttpNotFound();
@@ -40,29 +41,28 @@ namespace FPTBookStore.Controllers
         }
         public ActionResult Create()
         {
+            //if (Session["Admin"] == null)
+            //{
+            //    Session["UserName"] = null;
+            //    return RedirectToAction("Login", "Home");
+            //}
             ViewBag.AuthorID = new SelectList(db.Authors, "AuthorID", "AuthorName");
             ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName");
-            if (Session["Admin"] == null)
-            {
-                Session["UserName"] = null;
-                return RedirectToAction("Login", "Home");
-            }
             return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(Book book, HttpPostedFileBase file)
         {
-            if (ModelState.IsValid)
+            if (true)
             {
-                ViewBag.AuthorID = new SelectList(db.Authors, "AuthorID", "AuthorName", book.AuthorID);
-                ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName", book.CategoryID);
+      
                 if (file != null)
                 {
-                    string pic = System.IO.Path.GetFileName(file.FileName);
-                    string path = System.IO.Path.Combine(Server.MapPath("~/Content/images/"), pic);
+                    string path = Path.Combine(Server.MapPath("~/Content/images/"), Path.GetFileName(file.FileName));
                     file.SaveAs(path);
                     book.Img = path.ToString();
+                    Console.WriteLine(book.Img);
                 }
                 if (book == null)
                 {
@@ -76,14 +76,16 @@ namespace FPTBookStore.Controllers
                     return RedirectToAction("Index");
                 }
             }
+            ViewBag.AuthorID = new SelectList(db.Authors, "AuthorID", "AuthorName", book.AuthorID);
+            ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName", book.CategoryID);
             return View("Create");
 
         }
         public ActionResult Edit(int? id)
         {
             var book = db.Books.Where(x => x.BookID == id).FirstOrDefault();
-            ViewBag.AuthorID = new SelectList(db.Authors, "AuthorID", "AuthorName", book.AuthorID);
-            ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName", book.CategoryID);
+            ViewBag.AuthorID = new SelectList(db.Authors, "AuthorID", "AuthorName");
+            ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName");
             if (Session["Admin"] == null)
             {
                 Session["UserName"] = null;
@@ -104,8 +106,6 @@ namespace FPTBookStore.Controllers
         {
             if (ModelState.IsValid)
             {
-                ViewBag.AuthorID = new SelectList(db.Authors, "AuthorID", "AuthorName", book.AuthorID);
-                ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName", book.CategoryID);
                 if (Session["Admin"] == null)
                 {
                     Session["UserName"] = null;
@@ -129,6 +129,8 @@ namespace FPTBookStore.Controllers
                     return RedirectToAction("Index");
                 }
             }
+            ViewBag.AuthorID = new SelectList(db.Authors, "AuthorID", "AuthorName", book.AuthorID);
+            ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName", book.CategoryID);
             return View("Edit");
         }
         public ActionResult Delete(int? id)

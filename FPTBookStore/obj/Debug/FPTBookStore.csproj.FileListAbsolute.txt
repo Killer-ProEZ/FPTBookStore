@@ -80,6 +80,6 @@ D:\ASP Lab\FPTBookStore\FPTBookStore\obj\Debug\FPTBookStore.csproj.CoreCompileIn
 D:\ASP Lab\FPTBookStore\FPTBookStore\obj\Debug\FPTBookStore.csproj.CopyComplete
 D:\ASP Lab\FPTBookStore\FPTBookStore\obj\Debug\FPTBookStore.dll
 D:\ASP Lab\FPTBookStore\FPTBookStore\obj\Debug\FPTBookStore.pdb
-D:\ASP Lab\FPTBookStore\FPTBookStore\obj\Debug\FPTBookStore.csprojAssemblyReference.cache
-D:\ASP Lab\FPTBookStore\FPTBookStore\obj\Debug\FPTBookStore.Migrations.FistRun.resources
+D:\ASP Lab\FPTBookStore\FPTBookStore\obj\Debug\FPTBookStore.Migrations.ElevenRun.resources
 D:\ASP Lab\FPTBookStore\FPTBookStore\obj\Debug\FPTBookStore.csproj.GenerateResource.cache
+D:\ASP Lab\FPTBookStore\FPTBookStore\obj\Debug\FPTBookStore.csprojAssemblyReference.cache

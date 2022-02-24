@@ -1,4 +1,4 @@
-﻿
+﻿@model List<FPTBookStore.Models.Cart>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Home.cshtml";
@@ -32,36 +32,24 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td><img class="cart-img" src="~/Content/images/book5.jpg" alt=""></td>
-                        <td>Name</td>
-                        <td>
-                            <form action="add_cart.php" method="GET">
-                                <input type="hidden" name="action" value="update">
-                                <input type="hidden" name="id" value="">
-                                <input name='quality' class="quality" type="number" value="">
-                                <button type="submit" class="btn btn-primary btn-sm mb-1 ml-2">Update</button>
-                            </form>
-                        </td>
-                        <td><input readonly width="70px" type="text" value=""></td>
-                        <td align="center"><a onclick="deleteConfirm()" href=""><i class="far fa-trash-alt"></i></a></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td><img class="cart-img" src="~/Content/images/book2.jpg" alt=""></td>
-                        <td>Name</td>
-                        <td>
-                            <form action="add_cart.php" method="GET">
-                                <input type="hidden" name="action" value="update">
-                                <input type="hidden" name="id" value="">
-                                <input name='quality' class="quality" type="number" value="">
-                                <button type="submit" class="btn btn-primary btn-sm mb-1 ml-2">Update</button>
-                            </form>
-                        </td>
-                        <td><input readonly width="70px" type="text" value=""></td>
-                        <td align="center"><a onclick="deleteConfirm()" href=""><i class="far fa-trash-alt"></i></a></td>
-                    </tr>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <th scope="row">@item.ProductID</th>
+                            <td><img class="cart-img" src="~/Content/images/@item.Book.Img" alt=""></td>
+                            <td>@item.Book.BookName</td>
+                            <td>
+                                @using (Html.BeginForm("Edit","Cart"))
+                                {
+                                    <input type="hidden" name="id" value="@item.ProductID">
+                                    <input name='quality' class="quality" type="number" value="@item.Quality">
+                                    <input class="btn btn-primary btn-sm mb-1 ml-2" type="submit" value="Update" />
+                                }
+                            </td>
+                            <td><input readonly width="70px" type="text" value=""></td>
+                            <td align="center"><a onclick="deleteConfirm()" href=""><i class="far fa-trash-alt"></i></a></td>
+                        </tr>
+                    }
                 </tbody>
             </table>
             <form action="" method="POST">

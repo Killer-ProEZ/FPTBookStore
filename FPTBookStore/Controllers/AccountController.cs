@@ -38,6 +38,22 @@ namespace FPTBookStore.Controllers
             var accounts = db.Accounts.ToList();
             return View(accounts);
         }
+        [HttpPost]
+        public ActionResult Index(string searchstring)
+        {
+            if (Session["Admin"] == null)
+            {
+                Session["UserName"] = null;
+                return RedirectToAction("Login", "Home");
+            }
+            List<Account> data = new List<Account>();
+            data = db.Accounts.Where(x => x.UserName.ToLower().Contains(searchstring.ToLower())).ToList();
+            if (data == null)
+            {
+                return HttpNotFound();
+            }
+            return View(data);
+        }
         public ActionResult Create()
         {
             if (Session["Admin"] == null)

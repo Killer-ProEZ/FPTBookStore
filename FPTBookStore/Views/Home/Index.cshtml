@@ -87,7 +87,7 @@
                             </h4>
                             <div class="product_price row">
                                 <div class="col col-sm-8">
-                                    @Html.ActionLink("ADD", "Cart", "Cart", new { @class = "btn-add btn btn-info" ,id=book.BookID})
+                                    @Html.ActionLink("ADD", "AddCart", "Cart", new { productid = book.BookID, quality=1 }, new { @class = "btn-add btn btn-info"})
                                 </div>
                                 <div class="col col-sm-4">
                                     @Html.ActionLink("Details", "Details", new {id = book.BookID }, new { @class = "btn-details btn btn-info" })

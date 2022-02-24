@@ -14,7 +14,10 @@ namespace FPTBookStore.Models
         public string BookID { get; set; }
         [Required]
         [Range(0, 100000000, ErrorMessage = "Please enter correct value")]
-        public string Price { get; set; }
+        public int Price { get; set; }
+        [Required]
+        [Range(0, 100000, ErrorMessage = "Please enter correct value")]
+        public int Quality { get; set; }
         [Required]
         public int OrderID { get; set; }
         public virtual Order Order { get; set; }

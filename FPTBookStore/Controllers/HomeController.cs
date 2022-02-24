@@ -103,7 +103,7 @@ namespace FPTBookStore.Controllers
         public ActionResult Logout()
         {
             Session.Clear();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index","Home");
         }
         public ActionResult Register()
         {
@@ -154,7 +154,7 @@ namespace FPTBookStore.Controllers
             }
             return View(book);
         }
-
+      
         public ActionResult Edit()
         {
             Session["Admin"] = null;
@@ -176,25 +176,29 @@ namespace FPTBookStore.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Account account)
         {
-            var user = Convert.ToString(Session["UserName"]);
-            var reaccount = db.Accounts.FirstOrDefault(x => x.UserName.Equals(user));
-            if (account == null)
+            if (ModelState.IsValid)
             {
-                return HttpNotFound();
+                var user = Convert.ToString(Session["UserName"]);
+                var reaccount = db.Accounts.FirstOrDefault(x => x.UserName.Equals(user));
+                if (account == null)
+                {
+                    return HttpNotFound();
+                }
+                else
+                {
+                    reaccount.Address = account.Email;
+                    reaccount.Fullname = account.Fullname;
+                    reaccount.Password = GetMD5(account.Password);
+                    reaccount.RePassword = GetMD5(account.RePassword);
+                    reaccount.Tel = account.Tel;
+                    reaccount.Email = account.Email;
+                    reaccount.State = 0;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                return View("Index");
             }
-            else
-            {
-                reaccount.Address = account.Email;
-                reaccount.Fullname = account.Fullname;
-                reaccount.Password = GetMD5(account.Password);
-                reaccount.RePassword = GetMD5(account.RePassword);
-                reaccount.Tel = account.Tel;
-                reaccount.Email = account.Email;
-                reaccount.State = 0;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View("Index");
+            return View("Edit");
         }
     }
 }

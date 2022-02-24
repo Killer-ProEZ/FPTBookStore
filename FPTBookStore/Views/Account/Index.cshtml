@@ -16,12 +16,13 @@
     <div class="add-block  mt-2">
         <div class="d-flex justify-content-between mb-2">
             <a class="btn btn-primary" href="@Url.Action("Create","Account")"><i class="fa-solid fa-plus"></i>  Add Accounts</a>
-            <form>
+            @using (Html.BeginForm())
+            {
                 <div class="d-flex justify-content-between">
-                    <input class="form-control mr-2" type="text">
+                    @Html.TextBox("searchstring","",new { @class= "form-control mr-2",type="text" });
                     <input type="submit" value="Search" class="btn btn-primary">
                 </div>
-            </form>
+            }
         </div>
     </div>
     <div class="table-responsive mt-2">

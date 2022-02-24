@@ -43,7 +43,7 @@
                             <li>@Html.ActionLink("Help", "Help")</li>
                             <li>@Html.ActionLink($"Hi {Session["UserName"]}", "Edit", "Home")</li>
                             <li>@Html.ActionLink("Logout", "Logout")</li>
-                            <li>@Html.ActionLink("Cart", "Cart")</li>
+                            <li>@Html.ActionLink("Cart", "Index", "Cart")</li>
                         }
                         else
                         {
@@ -52,7 +52,7 @@
                             <li>@Html.ActionLink("Help", "Help", "Home")</li>
                             <li>@Html.ActionLink("Login", "Login", "Home")</li>
                             <li>@Html.ActionLink("Register", "Register", "Home")</li>
-                            <li>@Html.ActionLink("Cart", "Cart", "Cart")</li>
+                            <li>@Html.ActionLink("Cart", "Index", "Cart")</li>
                         }
                     </ul>
                 </nav>

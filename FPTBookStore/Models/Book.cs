@@ -20,7 +20,6 @@ namespace FPTBookStore.Models
         [Range(0,100000000, ErrorMessage= "Please enter correct value")]
         public int Price { get; set; }
         [Required]
-        [Range(0, 100000000, ErrorMessage = "Please enter correct value")]
         public string Description { get; set; }
         [Required]
         [DisplayFormat(DataFormatString = "{dd.MM.yyyy}")]
