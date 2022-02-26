@@ -76,10 +76,10 @@ D:\ASP Lab\FPTBookStore\FPTBookStore\bin\System.Web.WebPages.Razor.xml
 D:\ASP Lab\FPTBookStore\FPTBookStore\bin\Newtonsoft.Json.xml
 D:\ASP Lab\FPTBookStore\FPTBookStore\bin\Antlr3.Runtime.pdb
 D:\ASP Lab\FPTBookStore\FPTBookStore\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-D:\ASP Lab\FPTBookStore\FPTBookStore\obj\Release\FPTBookStore.csprojAssemblyReference.cache
-D:\ASP Lab\FPTBookStore\FPTBookStore\obj\Release\FPTBookStore.csproj.GenerateResource.cache
 D:\ASP Lab\FPTBookStore\FPTBookStore\obj\Release\FPTBookStore.csproj.CoreCompileInputs.cache
 D:\ASP Lab\FPTBookStore\FPTBookStore\obj\Release\FPTBookStore.csproj.CopyComplete
 D:\ASP Lab\FPTBookStore\FPTBookStore\obj\Release\FPTBookStore.dll
 D:\ASP Lab\FPTBookStore\FPTBookStore\obj\Release\FPTBookStore.pdb
-D:\ASP Lab\FPTBookStore\FPTBookStore\obj\Release\FPTBookStore.Migrations.FistRun.resources
+D:\ASP Lab\FPTBookStore\FPTBookStore\obj\Release\FPTBookStore.csprojAssemblyReference.cache
+D:\ASP Lab\FPTBookStore\FPTBookStore\obj\Release\FPTBookStore.Migrations._13.resources
+D:\ASP Lab\FPTBookStore\FPTBookStore\obj\Release\FPTBookStore.csproj.GenerateResource.cache

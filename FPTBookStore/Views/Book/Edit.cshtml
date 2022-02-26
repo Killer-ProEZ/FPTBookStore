@@ -31,8 +31,11 @@
             <div class="form-group mt-2">
                 @Html.LabelFor(model => model.Img, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-12">
-                    @Html.EditorFor(model => model.Img, new { htmlAttributes = new { @class = "form-control" } })
+                    <input type="file" name="file" id="file" style="width: 100%;" class="form-control" placeholder="@Model.Img" />
                     @Html.ValidationMessageFor(model => model.Img, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-6 ml-2">
+                    <img style="max-width: 200px" src="~/Content/images/@Model.Img" class="img-thumbnail" alt="...">
                 </div>
             </div>
 

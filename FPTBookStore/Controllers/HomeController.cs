@@ -41,7 +41,7 @@ namespace FPTBookStore.Controllers
             data = db.Books.Where(x => x.BookName.Contains(searchstring)).ToList();
             if (data==null)
             {
-                return HttpNotFound();
+                return RedirectToAction("Index");
             }
             return View(data);
         }

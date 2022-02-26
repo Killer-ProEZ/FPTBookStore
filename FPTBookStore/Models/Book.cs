@@ -12,7 +12,7 @@ namespace FPTBookStore.Models
         public int BookID { get; set; }
         [Required]
         public string BookName { get; set; }
-        [Required]
+        [DataType(DataType.Upload)]
         public string Img { get; set; }
         [Required]
         public int Stock { get; set; }

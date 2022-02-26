@@ -139,9 +139,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202202240440034_ElevenRun.cs" />
-    <Compile Include="Migrations\202202240440034_ElevenRun.Designer.cs">
-      <DependentUpon>202202240440034_ElevenRun.cs</DependentUpon>
+    <Compile Include="Migrations\202202260434449_13.cs" />
+    <Compile Include="Migrations\202202260434449_13.Designer.cs">
+      <DependentUpon>202202260434449_13.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Author.cs" />
@@ -176,28 +176,7 @@
     <Content Include="Content\images\book4.jpg" />
     <Content Include="Content\images\book5.jpg" />
     <Content Include="Content\images\book6.jpg" />
-    <Content Include="Content\images\d1.jpg" />
     <Content Include="Content\images\error-404-monochrome.svg" />
-    <Content Include="Content\images\img1.jpg" />
-    <Content Include="Content\images\img2.jpg" />
-    <Content Include="Content\images\img3.jpg" />
-    <Content Include="Content\images\img4.jpg" />
-    <Content Include="Content\images\img5.jpg" />
-    <Content Include="Content\images\img6.jpg" />
-    <Content Include="Content\images\img7.jpg" />
-    <Content Include="Content\images\s1.jpg" />
-    <Content Include="Content\images\s10.jpg" />
-    <Content Include="Content\images\s11.jpg" />
-    <Content Include="Content\images\s12.jpg" />
-    <Content Include="Content\images\s2.jpg" />
-    <Content Include="Content\images\s3.jpg" />
-    <Content Include="Content\images\s4.jpg" />
-    <Content Include="Content\images\s5.jpg" />
-    <Content Include="Content\images\s6.jpg" />
-    <Content Include="Content\images\s7.jpg" />
-    <Content Include="Content\images\s8.jpg" />
-    <Content Include="Content\images\s9.jpg" />
-    <Content Include="Content\images\single.jpg" />
     <Content Include="Content\js\dashboard.js" />
     <Content Include="Content\js\datatables-simple-demo.js" />
     <Content Include="Content\js\scripts.js" />
@@ -276,8 +255,8 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202202240440034_ElevenRun.resx">
-      <DependentUpon>202202240440034_ElevenRun.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202202260434449_13.resx">
+      <DependentUpon>202202260434449_13.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

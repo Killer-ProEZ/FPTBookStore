@@ -41,11 +41,11 @@ namespace FPTBookStore.Controllers
         }
         public ActionResult Create()
         {
-            //if (Session["Admin"] == null)
-            //{
-            //    Session["UserName"] = null;
-            //    return RedirectToAction("Login", "Home");
-            //}
+            if (Session["Admin"] == null)
+            {
+                Session["UserName"] = null;
+                return RedirectToAction("Login", "Home");
+            }
             ViewBag.AuthorID = new SelectList(db.Authors, "AuthorID", "AuthorName");
             ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName");
             return View();
@@ -54,23 +54,30 @@ namespace FPTBookStore.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Book book, HttpPostedFileBase file)
         {
-            if (true)
+            if (file == null)
             {
-      
+                ViewBag.Error = "Image can't be empty";
+                ViewBag.AuthorID = new SelectList(db.Authors, "AuthorID", "AuthorName", book.AuthorID);
+                ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName", book.CategoryID);
+                return View("Create");
+            }
+            if (ModelState.IsValid)
+            {
+                string pic = System.IO.Path.GetFileName(file.FileName);
                 if (file != null)
                 {
                     string path = Path.Combine(Server.MapPath("~/Content/images/"), Path.GetFileName(file.FileName));
                     file.SaveAs(path);
-                    book.Img = path.ToString();
-                    Console.WriteLine(book.Img);
+                    book.Img = pic.ToString();
                 }
+
                 if (book == null)
                 {
                     return HttpNotFound();
                 }
                 else
                 {
-                    Console.WriteLine(book);
+                    book.Img = pic.ToString();
                     db.Books.Add(book);
                     db.SaveChanges();
                     return RedirectToAction("Index");
@@ -102,15 +109,24 @@ namespace FPTBookStore.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Book book)
+        public ActionResult Edit(Book book, HttpPostedFileBase file)
         {
+            if (Session["Admin"] == null)
+            {
+                Session["UserName"] = null;
+                return RedirectToAction("Login", "Home");
+            }
+            if (file != null)
+            {
+                string pic = System.IO.Path.GetFileName(file.FileName);
+                string path = Path.Combine(Server.MapPath("~/Content/images/"), Path.GetFileName(file.FileName));
+                file.SaveAs(path);
+                book.Img = pic.ToString();
+                Console.WriteLine(book.Img);
+            }
             if (ModelState.IsValid)
             {
-                if (Session["Admin"] == null)
-                {
-                    Session["UserName"] = null;
-                    return RedirectToAction("Login", "Home");
-                }
+            
                 var rebook = db.Books.Where(x => x.BookID == book.BookID).FirstOrDefault();
                 if (rebook == null)
                 {
@@ -118,9 +134,13 @@ namespace FPTBookStore.Controllers
                 }
                 else
                 {
+                    if (book.Img != null)
+                    {
+                        rebook.Img = book.Img;
+                        Console.WriteLine(book.Img);
+                    }
                     rebook.BookName = book.BookName;
                     rebook.Price = book.Price;
-                    rebook.Img = book.Img;
                     rebook.Stock = book.Stock;
                     rebook.Description = book.Description;
                     rebook.AuthorID = book.AuthorID;

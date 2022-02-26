@@ -3,7 +3,7 @@ namespace FPTBookStore.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class ElevenRun : DbMigration
+    public partial class _13 : DbMigration
     {
         public override void Up()
         {
@@ -60,7 +60,7 @@ namespace FPTBookStore.Migrations
                     {
                         BookID = c.Int(nullable: false, identity: true),
                         BookName = c.String(nullable: false),
-                        Img = c.String(nullable: false),
+                        Img = c.String(),
                         Stock = c.Int(nullable: false),
                         Price = c.Int(nullable: false),
                         Description = c.String(nullable: false),

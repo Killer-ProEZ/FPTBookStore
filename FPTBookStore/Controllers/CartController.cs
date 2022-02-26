@@ -5,6 +5,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using FPTBookStore.Models;
+using System.Web.UI;
+
 namespace FPTBookStore.Controllers
 {
     public class CartController : Controller
@@ -16,16 +18,24 @@ namespace FPTBookStore.Controllers
         {
             var cart = Session[CartSession];
             var list = new List<Cart>();
+            var sum = 0;
             if (cart != null)
             {
                 list = (List<Cart>)cart;
+            }
+            ViewBag.Sum = 0;
+            foreach (var item in list)
+            {
+                sum += item.Quality * item.Book.Price;
+                ViewBag.Sum = sum;
             }
             return View(list);
         }
         public ActionResult AddCart(int? productid, int? quality)
         {
+            var book = db.Books.Where(x => x.BookID == productid).FirstOrDefault(); ;
+            book.Stock -= 1;
             var cart = Session[CartSession];
-            Console.WriteLine(cart);
             if (cart != null)
             {
                 var list = (List<Cart>)cart;
@@ -47,7 +57,6 @@ namespace FPTBookStore.Controllers
                     item.Book=db.Books.Where(x=>x.BookID==productid).FirstOrDefault();
                     list.Add(item);
                 }
-                Console.WriteLine(list);
                 Session[CartSession] = list;
                 return RedirectToAction("Index");
             }
@@ -63,6 +72,40 @@ namespace FPTBookStore.Controllers
             }
             return RedirectToAction("Index");
         }
-        public Action
+        [HttpPost]
+        public ActionResult Edit(int? productid, int quality)
+        {
+            List<Cart> list = (List<Cart>)Session[CartSession];
+            foreach (var item in list)
+            {
+                if (item.ProductID == productid)
+                {
+                    if (quality <= 0)
+                    {
+                        Session["Error"] = Convert.ToInt32(item.ProductID);
+                        Session["Text"] = "The quality must be greater than 0";
+                        return RedirectToAction("Index");
+                    }
+                    if (item.Book.Stock < quality)
+                    {
+                        Session["Error"] = Convert.ToInt32(item.ProductID);
+                        Session["Text"] = "The number of books is not enough to order";
+                        return RedirectToAction("Index");
+                    }
+                    Session["Error"] = null;
+                    item.Quality = quality;
+                }
+            }
+            Session[CartSession] = list;
+            return RedirectToAction("Index");
+        }
+        public ActionResult Delete(int? id)
+        {
+            List<Cart> list = (List<Cart>)Session[CartSession];
+            Cart book=list.Find(x => x.ProductID == id);
+            list.Remove(book);
+            Session[CartSession] = list;
+            return RedirectToAction("Index");
+        }
     }
 }

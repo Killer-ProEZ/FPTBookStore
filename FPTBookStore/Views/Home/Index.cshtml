@@ -48,6 +48,7 @@
     </div>
 </section>
 <!-- //ab -->
+
 <!--/ab -->
 <section class="about py-5">
     <div class="container pb-lg-3">
@@ -57,12 +58,10 @@
             {
                 <div class="search-content">
                     <div class="input-block">
-                        @*<input type="text" class="form-control">*@
-                        @Html.TextBox("searchstring","",new { @class= "form-control", type="text" })
+                        @Html.TextBox("searchstring", "", new { @class = "form-control", type = "text" })
                     </div>
                     <div class="button-block">
-                        @*<button type="submit" class="btn btn-info"><i class="fa-solid fa-magnifying-glass"></i></button>*@
-                        <input type="submit" class="btn btn-info" value="Search"/>
+                        <input type="submit" class="btn btn-info" value="Search" />
                     </div>
                 </div>
             }
@@ -74,7 +73,7 @@
                 <div class="col-md-4 product-men">
                     <div class="product-shoe-info shoe text-center">
                         <div class="men-thumb-item">
-                            <img src="~/Content/images/@book.Img" class="img-fluid" alt="">
+                            <img style="width: 300px" src="~/Content/images/@book.Img" class="img-fluid" alt="">
                             <span>
                                 <div class="grid-price">
                                     <span class="money">$ @book.Price</span>
@@ -87,10 +86,10 @@
                             </h4>
                             <div class="product_price row">
                                 <div class="col col-sm-8">
-                                    @Html.ActionLink("ADD", "AddCart", "Cart", new { productid = book.BookID, quality=1 }, new { @class = "btn-add btn btn-info"})
+                                    @Html.ActionLink("ADD", "AddCart", "Cart", new { productid = book.BookID, quality = 1 }, new { @class = "btn-add btn btn-info" })
                                 </div>
                                 <div class="col col-sm-4">
-                                    @Html.ActionLink("Details", "Details", new {id = book.BookID }, new { @class = "btn-details btn btn-info" })
+                                    @Html.ActionLink("Details", "Details", new { id = book.BookID }, new { @class = "btn-details btn btn-info" })
                                 </div>
                             </div>
                         </div>
