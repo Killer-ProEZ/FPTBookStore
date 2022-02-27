@@ -59,6 +59,7 @@
                 <div class="search-content">
                     <div class="input-block">
                         @Html.TextBox("searchstring", "", new { @class = "form-control", type = "text" })
+                        <p class="text-danger">@ViewBag.Error</p>
                     </div>
                     <div class="button-block">
                         <input type="submit" class="btn btn-info" value="Search" />

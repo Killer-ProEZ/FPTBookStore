@@ -54,15 +54,31 @@ namespace FPTBookStore.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Book book, HttpPostedFileBase file)
         {
+            ViewBag.AuthorID = new SelectList(db.Authors, "AuthorID", "AuthorName", book.AuthorID);
+            ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName", book.CategoryID);
             if (file == null)
             {
                 ViewBag.Error = "Image can't be empty";
-                ViewBag.AuthorID = new SelectList(db.Authors, "AuthorID", "AuthorName", book.AuthorID);
-                ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName", book.CategoryID);
                 return View("Create");
             }
             if (ModelState.IsValid)
             {
+                if (book.Stock <= 0)
+                {
+                    ViewBag.Stock = "Stock must be greater than 0";
+                    return View("Create");
+                }
+                if (book.Price <= 0)
+                {
+                    ViewBag.Price = "Price must be greater than 0";
+                    return View("Create");
+                }
+                var rebook = db.Books.Where(x => x.BookID == book.BookID).FirstOrDefault();
+                if (rebook != null)
+                {
+                    ViewBag.Info = "BookName is exist";
+                    return View("Create");
+                }
                 string pic = System.IO.Path.GetFileName(file.FileName);
                 if (file != null)
                 {
@@ -90,6 +106,7 @@ namespace FPTBookStore.Controllers
         }
         public ActionResult Edit(int? id)
         {
+            
             var book = db.Books.Where(x => x.BookID == id).FirstOrDefault();
             ViewBag.AuthorID = new SelectList(db.Authors, "AuthorID", "AuthorName");
             ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName");
@@ -116,29 +133,30 @@ namespace FPTBookStore.Controllers
                 Session["UserName"] = null;
                 return RedirectToAction("Login", "Home");
             }
+            var rebook = db.Books.Where(x => x.BookID == book.BookID).FirstOrDefault();
+            string pic = "";
             if (file != null)
             {
-                string pic = System.IO.Path.GetFileName(file.FileName);
+                string file_name = book.Img;
+                string path1 = Server.MapPath("~/Content/images/");
+                FileInfo file1 = new FileInfo(path1 + file_name);
+                if (file1.Exists)
+                {
+                    file1.Delete();
+                }
+                pic = System.IO.Path.GetFileName(file.FileName);
                 string path = Path.Combine(Server.MapPath("~/Content/images/"), Path.GetFileName(file.FileName));
                 file.SaveAs(path);
-                book.Img = pic.ToString();
-                Console.WriteLine(book.Img);
+                rebook.Img = pic.ToString();
             }
             if (ModelState.IsValid)
             {
-            
-                var rebook = db.Books.Where(x => x.BookID == book.BookID).FirstOrDefault();
                 if (rebook == null)
                 {
                     return HttpNotFound();
                 }
                 else
                 {
-                    if (book.Img != null)
-                    {
-                        rebook.Img = book.Img;
-                        Console.WriteLine(book.Img);
-                    }
                     rebook.BookName = book.BookName;
                     rebook.Price = book.Price;
                     rebook.Stock = book.Stock;
@@ -155,12 +173,20 @@ namespace FPTBookStore.Controllers
         }
         public ActionResult Delete(int? id)
         {
+
             if (Session["Admin"] == null)
             {
                 Session["UserName"] = null;
                 return RedirectToAction("Login", "Home");
             }
             var book = db.Books.Where(x => x.BookID == id).FirstOrDefault();
+            string file_name = book.Img;
+            string path = Server.MapPath("~/Content/images/");
+            FileInfo file = new FileInfo(path + file_name);
+            if (file.Exists)
+            {
+                file.Delete();
+            }
             if (book == null)
             {
                 return HttpNotFound();

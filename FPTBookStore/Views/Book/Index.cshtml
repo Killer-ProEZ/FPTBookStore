@@ -31,6 +31,7 @@
                 <tr>
                     <th scope="col">BookId</th>
                     <th scope="col">BookName</th>
+                    <th scope="col">Image</th>
                     <th scope="col">Price</th>
                     <th scope="col">Stock</th>
                     <th scope="col">Date Add</th>
@@ -44,6 +45,9 @@
                     <tr>
                         <td>@book.BookID</td>
                         <td>@book.BookName</td>
+                        <td>
+                            <img style="width: 80px" src="~/Content/images/@book.Img" class="rounded d-block" alt="...">
+                        </td>
                         <td>@book.Price</td>
                         <td>@book.Stock</td>
                         <td>@book.Date_add</td>

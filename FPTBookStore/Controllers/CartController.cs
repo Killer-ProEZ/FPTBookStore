@@ -107,5 +107,27 @@ namespace FPTBookStore.Controllers
             Session[CartSession] = list;
             return RedirectToAction("Index");
         }
+        [HttpPost]
+        public ActionResult Order(int total)
+        {
+            if (Session["UserName"] == null)
+            {
+                Session["infor"] = "You must login before ordering";
+                return RedirectToAction("Login", "Home");
+            }
+            string user = Session["UserName"].ToString();
+            var account = db.Accounts.Where(x => x.UserName == user).FirstOrDefault();
+            if (account == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.Money = total;
+            return View(account);
+        }
+        [HttpPost]
+        public ActionResult Confirm()
+        {
+            return View();
+        }
     }
 }

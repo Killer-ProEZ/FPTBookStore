@@ -36,9 +36,14 @@ namespace FPTBookStore.Controllers
         [HttpPost]
         public ActionResult Index(string searchstring)
         {
+            if (searchstring == null)
+            {
+                ViewBag.Error = "Searching can't be empty ";
+                return View("Index");
+            }
             Session["Admin"] = null;
             List<Book> data = new List<Book>();
-            data = db.Books.Where(x => x.BookName.Contains(searchstring)).ToList();
+            data = db.Books.Where(x => x.BookName.Contains(searchstring)||x.Category.CategoryName.ToLower()==searchstring.ToLower()).ToList();
             if (data==null)
             {
                 return RedirectToAction("Index");
@@ -103,7 +108,7 @@ namespace FPTBookStore.Controllers
         public ActionResult Logout()
         {
             Session.Clear();
-            return RedirectToAction("Index","Home");
+            return RedirectToAction("Index");
         }
         public ActionResult Register()
         {
