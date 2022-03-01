@@ -11,7 +11,7 @@ namespace FPTBookStore.Models
         [Key]
         public int OrderdetailsID { get; set; }
         [Required]
-        public string BookID { get; set; }
+        public int BookID { get; set; }
         [Required]
         [Range(0, 100000000, ErrorMessage = "Please enter correct value")]
         public int Price { get; set; }

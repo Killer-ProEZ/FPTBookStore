@@ -24,11 +24,15 @@ namespace FPTBookStore.Controllers
                 list = (List<Cart>)cart;
             }
             ViewBag.Sum = 0;
+            var quanlity = 0;
+            Session["Quality"] = 0;
             foreach (var item in list)
             {
                 sum += item.Quality * item.Book.Price;
+                quanlity += item.Quality;
                 ViewBag.Sum = sum;
             }
+            Session["Quality"] = quanlity;
             return View(list);
         }
         public ActionResult AddCart(int? productid, int? quality)
@@ -58,7 +62,15 @@ namespace FPTBookStore.Controllers
                     list.Add(item);
                 }
                 Session[CartSession] = list;
-                return RedirectToAction("Index");
+                Session["Infor"] = "Add";
+                var quanlity = 0;
+                Session["Quality"] = 0;
+                foreach (var item in list)
+                {
+                    quanlity += item.Quality;
+                }
+                Session["Quality"] = quanlity;
+                return RedirectToAction("Index","Home");
             }
             else
             {
@@ -69,8 +81,16 @@ namespace FPTBookStore.Controllers
                 var list = new List<Cart>();
                 list.Add(item);
                 Session[CartSession] = list;
+                var quanlity = 0;
+                Session["Quality"] = 0;
+                foreach (var item1 in list)
+                {
+                    quanlity += item1.Quality;
+                }
+                Session["Quality"] = quanlity;
             }
-            return RedirectToAction("Index");
+            Session["Infor"] = "Add";
+            return RedirectToAction("Index","Home");
         }
         [HttpPost]
         public ActionResult Edit(int? productid, int quality)
@@ -125,9 +145,36 @@ namespace FPTBookStore.Controllers
             return View(account);
         }
         [HttpPost]
-        public ActionResult Confirm()
+        public ActionResult Confirm(string fullname, int tel, int money, string address)
         {
-            return View();
+            Order order = new Order();
+            order.OrderDate = DateTime.Now;
+            order.TotalPrice = money;
+            var user = Session["UserName"].ToString();
+            order.UserName = user;
+            order.Address = address;
+            db.Orders.Add(order);
+            db.SaveChanges();
+            List<Cart> list = (List<Cart>)Session[CartSession];
+            var order1 = db.Orders.OrderByDescending(x => x.OrderID).FirstOrDefault();
+            foreach (var item in list)
+            {
+               
+                Orderdetail orderdetail = new Orderdetail();
+                orderdetail.BookID = Convert.ToInt32(item.Book.BookID);
+                orderdetail.Quality = Convert.ToInt32(item.Quality);
+                orderdetail.OrderID = Convert.ToInt32(order1.OrderID);
+                orderdetail.Price = Convert.ToInt32(item.Quality * item.Book.Price);
+                db.Orderdetails.Add(orderdetail);
+                db.SaveChanges();
+                var book = db.Books.Where(x => x.BookID == item.ProductID).FirstOrDefault();
+                book.Stock = book.Stock - item.Quality;
+                db.SaveChanges();
+            }
+            Session.Clear();
+            Session["UserName"] = user;
+            Session["Order"] = "Order";
+            return RedirectToAction("Index","Home");
         }
     }
 }

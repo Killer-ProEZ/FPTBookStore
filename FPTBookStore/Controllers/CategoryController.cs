@@ -41,7 +41,7 @@ namespace FPTBookStore.Controllers
                 if (checkcategory != null)
                 {
                     ViewBag.Error = "CategoryName is exits";
-                    return RedirectToAction("Create");
+                    return View("Create");
                 }
                 if (category == null)
                 {

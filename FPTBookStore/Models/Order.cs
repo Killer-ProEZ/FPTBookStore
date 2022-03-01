@@ -14,7 +14,7 @@ namespace FPTBookStore.Models
         [Range(0, 100000000, ErrorMessage = "Please enter correct value")]
         public int TotalPrice { get; set; }
         [Required]
-        public int UserName { get; set; }
+        public string UserName { get; set; }
         [Required]
         public DateTime OrderDate { get; set; }
         [Required]

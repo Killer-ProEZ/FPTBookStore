@@ -25,7 +25,7 @@
                 <div class="col-md-12">
                     @Html.EditorFor(model => model.BookName, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.BookName, "", new { @class = "text-danger" })
-                    <p class="text-danger">@ViewBag.Info</p>
+                    <p class="text-danger">@Session["Name"] </p>
                 </div>
             </div>
 
@@ -46,7 +46,7 @@
                 <div class="col-md-12">
                     @Html.EditorFor(model => model.Stock, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.Stock, "", new { @class = "text-danger" })
-                    <p class="text-danger">@ViewBag.Stock</p>
+                    <p class="text-danger">@Session["Stock"] </p>
                 </div>
             </div>
 
@@ -55,7 +55,7 @@
                 <div class="col-md-12">
                     @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
-                    <p class="text-danger">@ViewBag.Price</p>
+                    <p class="text-danger">@Session["Price"] </p>
                 </div>
             </div>
 

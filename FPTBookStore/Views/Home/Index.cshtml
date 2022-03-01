@@ -2,6 +2,22 @@
 @{
     ViewBag.Title = "Home Page";
 }
+@if (Session["Order"] != null)
+{
+    <script>
+        alert("Order Successful");
+    </script>
+    Session["Order"] = null;
+}
+
+
+@if (Session["Infor"] != null)
+{
+    <script>
+        alert("Add Successful");
+    </script>
+    Session["Infor"] = null;
+}
 
 <section class="about py-md-5 py-5">
     <div class="container-fluid">
@@ -48,7 +64,6 @@
     </div>
 </section>
 <!-- //ab -->
-
 <!--/ab -->
 <section class="about py-5">
     <div class="container pb-lg-3">

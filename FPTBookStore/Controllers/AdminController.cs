@@ -34,5 +34,9 @@ namespace FPTBookStore.Controllers
             ViewBag.orders = numberOrder;
             return View(bookdata);
         }
+        public ActionResult Report()
+        {
+            return View();
+        }
     }
 }

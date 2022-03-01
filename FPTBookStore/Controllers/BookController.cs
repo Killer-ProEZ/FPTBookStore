@@ -135,6 +135,24 @@ namespace FPTBookStore.Controllers
             }
             var rebook = db.Books.Where(x => x.BookID == book.BookID).FirstOrDefault();
             string pic = "";
+            if (book.Stock <= 0)
+            {
+                Session["Stock"] = "Stock must be greater than 0";
+                return RedirectToAction("Edit", new { id = book.BookID });
+            }
+            else
+            {
+                Session["Stock"] = null;
+            }
+            if (book.Price <= 0)
+            {
+                Session["Price"] = "Price must be greater than 0";
+                return RedirectToAction("Edit");
+            }
+            else
+            {
+                Session["Price"] = null;
+            }
             if (file != null)
             {
                 string file_name = book.Img;
@@ -149,6 +167,7 @@ namespace FPTBookStore.Controllers
                 file.SaveAs(path);
                 rebook.Img = pic.ToString();
             }
+
             if (ModelState.IsValid)
             {
                 if (rebook == null)

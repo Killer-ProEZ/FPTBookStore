@@ -81,5 +81,5 @@ D:\ASP Lab\FPTBookStore\FPTBookStore\obj\Release\FPTBookStore.csproj.CopyComplet
 D:\ASP Lab\FPTBookStore\FPTBookStore\obj\Release\FPTBookStore.dll
 D:\ASP Lab\FPTBookStore\FPTBookStore\obj\Release\FPTBookStore.pdb
 D:\ASP Lab\FPTBookStore\FPTBookStore\obj\Release\FPTBookStore.csprojAssemblyReference.cache
-D:\ASP Lab\FPTBookStore\FPTBookStore\obj\Release\FPTBookStore.Migrations._13.resources
+D:\ASP Lab\FPTBookStore\FPTBookStore\obj\Release\FPTBookStore.Migrations._15.resources
 D:\ASP Lab\FPTBookStore\FPTBookStore\obj\Release\FPTBookStore.csproj.GenerateResource.cache

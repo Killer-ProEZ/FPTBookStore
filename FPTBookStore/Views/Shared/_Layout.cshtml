@@ -34,6 +34,13 @@
                     <label for="drop" class="toggle">Menu</label>
                     <input type="checkbox" id="drop" />
                     <ul class="menu mt-2">
+                        @{
+                            var quality = 0;
+                        }
+                        @if (Session["Quality"] != null)
+                        {
+                            quality = Convert.ToInt32(Session["Quality"]);
+                        }
                         @if (Session["UserName"] != null)
                         {
                             <li>@Html.ActionLink("Home", "Index")</li>
@@ -41,7 +48,7 @@
                             <li>@Html.ActionLink("Help", "Help")</li>
                             <li>@Html.ActionLink($"Hi {Session["UserName"]}", "Edit", "Home")</li>
                             <li>@Html.ActionLink("Logout", "Logout")</li>
-                            <li>@Html.ActionLink("Cart", "Index", "Cart")</li>
+                            <li>@Html.ActionLink($"Cart ({quality})", "Index", "Cart")</li>
                         }
                         else
                         {
@@ -50,7 +57,7 @@
                             <li>@Html.ActionLink("Help", "Help", "Home")</li>
                             <li>@Html.ActionLink("Login", "Login", "Home")</li>
                             <li>@Html.ActionLink("Register", "Register", "Home")</li>
-                            <li>@Html.ActionLink("Cart", "Index", "Cart")</li>
+                            <li>@Html.ActionLink($"Cart ({quality})", "Index", "Cart")</li>
                         }
                     </ul>
                 </nav>
