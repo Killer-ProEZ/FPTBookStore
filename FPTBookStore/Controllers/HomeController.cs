@@ -191,17 +191,21 @@ namespace FPTBookStore.Controllers
                 }
                 else
                 {
+                    if (account.Password != reaccount.Password)
+                    {
+                        reaccount.Password = GetMD5(account.Password);
+                        reaccount.RePassword = GetMD5(account.RePassword);
+                    }
                     reaccount.Address = account.Email;
                     reaccount.Fullname = account.Fullname;
-                    reaccount.Password = GetMD5(account.Password);
-                    reaccount.RePassword = GetMD5(account.RePassword);
                     reaccount.Tel = account.Tel;
                     reaccount.Email = account.Email;
                     reaccount.State = 0;
                     db.SaveChanges();
                     return RedirectToAction("Index");
+                    Session["Profile"] = "Profile";
                 }
-                return View("Index");
+                return RedirectToAction("Index");
             }
             return View("Edit");
         }

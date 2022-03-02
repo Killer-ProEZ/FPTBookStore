@@ -36,7 +36,7 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-floating">
-                                                    @Html.EditorFor(model => model.Tel, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter your Tel", type = "number" } })
+                                                    @Html.EditorFor(model => model.Tel, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter your Tel", type = "tel" } })
                                                     @Html.LabelFor(model => model.Tel, htmlAttributes: new { @class = "" })
                                                     @Html.ValidationMessageFor(model => model.Tel, "", new { @class = "text-danger" })
                                                 </div>

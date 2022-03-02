@@ -4,19 +4,27 @@
 }
 @if (Session["Order"] != null)
 {
+    Session["Order"] = null;
     <script>
         alert("Order Successful");
     </script>
-    Session["Order"] = null;
+}
+
+@if (Session["Profile"] != null)
+{
+    Session["Profile"] = null;
+    <script>
+        alert("Update Successful");
+    </script>
 }
 
 
-@if (Session["Infor"] != null)
+@if (Session["Add"] != null)
 {
+    Session["Add"] = null;
     <script>
         alert("Add Successful");
     </script>
-    Session["Infor"] = null;
 }
 
 <section class="about py-md-5 py-5">

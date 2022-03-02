@@ -132,6 +132,7 @@
     <Compile Include="Controllers\BookController.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
+    <Compile Include="Controllers\HistoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\OrderdetailController.cs" />
@@ -239,6 +240,8 @@
     <Content Include="Views\Book\Edit.cshtml" />
     <Content Include="Views\Cart\Order.cshtml" />
     <Content Include="Views\Admin\Report.cshtml" />
+    <Content Include="Views\History\Index.cshtml" />
+    <Content Include="Views\History\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

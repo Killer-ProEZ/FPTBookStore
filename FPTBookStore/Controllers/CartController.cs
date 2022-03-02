@@ -62,7 +62,7 @@ namespace FPTBookStore.Controllers
                     list.Add(item);
                 }
                 Session[CartSession] = list;
-                Session["Infor"] = "Add";
+                Session["Add"] = "Add";
                 var quanlity = 0;
                 Session["Quality"] = 0;
                 foreach (var item in list)
@@ -89,7 +89,7 @@ namespace FPTBookStore.Controllers
                 }
                 Session["Quality"] = quanlity;
             }
-            Session["Infor"] = "Add";
+            Session["Add"] = "Add";
             return RedirectToAction("Index","Home");
         }
         [HttpPost]
@@ -158,8 +158,7 @@ namespace FPTBookStore.Controllers
             List<Cart> list = (List<Cart>)Session[CartSession];
             var order1 = db.Orders.OrderByDescending(x => x.OrderID).FirstOrDefault();
             foreach (var item in list)
-            {
-               
+            {              
                 Orderdetail orderdetail = new Orderdetail();
                 orderdetail.BookID = Convert.ToInt32(item.Book.BookID);
                 orderdetail.Quality = Convert.ToInt32(item.Quality);

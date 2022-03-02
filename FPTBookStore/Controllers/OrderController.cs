@@ -28,6 +28,19 @@ namespace FPTBookStore.Controllers
                 Session["UserName"] = null;
                 return RedirectToAction("Login", "Home");
             }
+            var orderdetails = db.Orderdetails.Where(x => x.OrderID == id).ToList();
+            foreach (var item in orderdetails)
+            {
+                if (orderdetails == null)
+                {
+                    return HttpNotFound();
+                }
+                else
+                {
+                    db.Orderdetails.Remove(item);
+                    db.SaveChanges();     
+                }
+            }
             var order = db.Orders.Where(x => x.OrderID == id).FirstOrDefault();
             if (order == null)
             {

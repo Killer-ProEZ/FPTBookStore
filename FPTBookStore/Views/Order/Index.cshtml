@@ -42,7 +42,7 @@
                         <td>@order.OrderDate</td>
                         <td>@order.TotalPrice</td>
                         <td>@order.Address</td>
-                        <td><a onclick="return confirm('Are you sure ?')" href="@Url.Action("Delete","Orderdetail",new { id=order.OrderID})"><i class="fa-solid fa-trash-can"></i>Delete</a></td>
+                        <td><a onclick="return confirm('Are you sure ?')" href="@Url.Action("Delete","Order",new { id=order.OrderID})"><i class="fa-solid fa-trash-can"></i>Delete</a></td>
                     </tr>
                 }
             </tbody>
