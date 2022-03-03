@@ -1,0 +1,86 @@
+﻿@model List<FPTBookStore.Models.Cart>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Home.cshtml";
+}
+
+<ol class="breadcrumb">
+    <li class="breadcrumb-item">
+        <a href="index.html">Home</a>
+    </li>
+    <li class="breadcrumb-item active">Cart</li>
+</ol>
+<!---->
+@if (Model.Count > 0)
+{
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4" data-aos="fade-right">
+                    <div class="section-title">
+                        <h2>Cart</h2>
+                        <p></p>
+                    </div>
+                </div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Img</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Quantity</th>
+                            <th width="100px" scope="col">Price</th>
+                            <th style="text-align: center;" scope="col">Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            var price = item.Quality * item.Book.Price;
+                            <tr>
+                                <th scope="row">@item.ProductID</th>
+                                <td><img class="cart-img" src="~/Content/images/@item.Book.Img" alt=""></td>
+                                <td>@item.Book.BookName</td>
+                                <td>
+                                    @using (Html.BeginForm("Edit", "Cart"))
+                                    {
+
+                                        var error = Convert.ToInt32(Session["Error"]);
+                                        @*<input type="hidden" name="id" value="@item.ProductID">*@
+                                        @Html.TextBox("productid", item.ProductID, new { @type = "hidden" })
+                                        @*<input name='quality' class="quality" type="number" value="@item.Quality">*@
+                                        @Html.TextBox("quality", item.Quality, new { @class = "quality", @type = "number" })
+                                        <input class="btn btn-primary btn-sm mb-1 ml-2" type="submit" value="Update" />
+                                        if (error != null && error == item.ProductID && Session["Error"] != null)
+                                        {
+                                            <p class="text-danger">@Session["Text"]</p>
+                                        }
+                                    }
+                                </td>
+                                <td><input readonly width="70px" type="text" value="@price"></td>
+                                <td align="center"><a onclick="return confirm('Are you sure ?')" href="@Url.Action("Delete","Cart",new { id=item.ProductID})"><i class="far fa-trash-alt"></i></a></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                @using (Html.BeginForm("Order","Cart"))
+                {
+                        <div class="form-group row total">
+                            <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Total </label>
+                            <div class="col-sm-10">
+                                <input type="number" class="form-control form-control-sm" name="total" id="total" readonly value="@ViewBag.Sum">
+                            </div>
+                        </div>
+                        <div align="center">
+                            <button name='btn_buy' style="width: 100px; font-weight: bold;" type="submit" class="btn btn-primary">Order</button>
+                        </div>
+                }
+            </div>
+        </div>
+    </section><!-- End Contact Section -->
+}
+else
+{
+    <h5 class="text-warning d-flex justify-content-center mt-2 mb-2">Cart is empty</h5>
+}
+

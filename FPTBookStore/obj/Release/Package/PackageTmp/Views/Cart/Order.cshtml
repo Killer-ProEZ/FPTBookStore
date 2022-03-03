@@ -1,0 +1,75 @@
+﻿@model FPTBookStore.Models.Account
+@{
+    ViewBag.Title = "Order";
+    Layout = "~/Views/Shared/_Home.cshtml";
+}
+
+<ol class="breadcrumb">
+    <li class="breadcrumb-item">
+        <a href="index.html">Home</a>
+    </li>
+    <li class="breadcrumb-item active">Confirm</li>
+</ol>
+<section class="login-layout">
+    <div id="layoutAuthentication">
+        <div id="layoutAuthentication_content">
+            <main>
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-5">
+                            <div class="card shadow-lg border-0 rounded-lg mt-5">
+                                <div class="card-header"><h3 class="text-center font-weight-light my-4">Confirm Order</h3></div>
+                                <div class="card-body">
+                                    @using (Html.BeginForm("Confirm", "Cart"))
+                                    {
+                                        @Html.AntiForgeryToken()
+                                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                        <div class="mb-3 row">
+                                            <label for="staticEmail" class="col-sm-3 col-form-label">FullName</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" readonly class="form-control-plaintext" id="fullname" name="fullname" value="@Model.Fullname">
+                                            </div>
+                                        </div>
+                                        <div class="mb-3 row">
+                                            <label for="staticEmail" class="col-sm-3 col-form-label">Tel</label>
+                                            <div class="col-sm-9">
+                                                <input type="number" readonly class="form-control-plaintext" id="tel" name="tel" value="@Model.Tel">
+                                            </div>
+                                        </div>
+                                        <div class="mb-3 row">
+                                            <label for="staticEmail" class="col-sm-3 col-form-label">Money</label>
+                                            <div class="col-sm-9">
+                                                <input type="number" readonly class="form-control-plaintext" id="money" name="money" value="@ViewBag.Money">
+                                            </div>
+                                        </div>
+                                        <div class="mb-3 row">
+                                            <label for="inputPassword" class="col-sm-3 col-form-label">Address</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" id="address" name="address" value="@Model.Address">
+                                            </div>
+                                        </div>
+                                        <div class="mb-3 row">
+                                            <label for="inputPassword" class="col-sm-3 col-form-label">Order Date</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" readonly class="form-control" id="orderdate" name="orderdate" value="@DateTime.Now">
+                                            </div>
+                                        </div>
+                                        <div class="mt-4 mb-0">
+                                            <div class="d-grid"><button type="submit" class="btn btn-primary btn-block">Confirm</button></div>
+                                        </div>
+                                    }
+                                </div>
+                                <div class="card-footer text-center py-3">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="js/scripts.js"></script>
+</section>
+

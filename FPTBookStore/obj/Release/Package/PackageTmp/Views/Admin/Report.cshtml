@@ -1,0 +1,48 @@
+﻿
+@{
+    ViewBag.Title = "Report";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+}
+
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 side-color">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Dashboard</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+
+        </div>
+    </div>
+
+    <h2>Report</h2>
+    <div class="container mb-3 mt-3">
+        @using (Html.BeginForm("Report","Admin"))
+        {
+            <div class="row">
+                <div class="col-sm-4">
+                    <samp>From</samp>
+                    <input type="date" class="form-control" name='startday' id="startday" required>
+                </div>
+                <div class="col-sm-4">
+                    <samp>To</samp>
+                    <input type="date" class="form-control" name='endday' id="endday" required>
+                </div>
+                <div class="col-sm-4">
+                    <button name="btn-summit" class="btn btn-info mt-4" type="submit">Submit</button>
+                </div>
+            </div>
+        }
+        <hr />
+        <div class="d-flex justify-content-center mt-3 mb-3">
+            <div class="" style="width: 300px;">
+                <div class="col col-sm-5">
+                    <h6 style="align-items: center;">Result: </h6>
+                </div>
+                <div class="input-group mb-3 col col-sm-7">
+                    <span class="input-group-text">$</span>
+                    <input type="text" readonly class="form-control" value="@ViewBag.Result" aria-label="Amount (to the nearest dollar)">
+                    <span class="input-group-text"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+

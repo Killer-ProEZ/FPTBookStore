@@ -1,0 +1,45 @@
+﻿@model IEnumerable<FPTBookStore.Models.Order>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Home.cshtml";
+}
+
+<ol class="breadcrumb">
+    <li class="breadcrumb-item">
+        <a href="#">Home</a>
+    </li>
+    <li class="breadcrumb-item active">Order History</li>
+</ol>
+<!---->
+<!-- banner -->
+<section class="ab-info-main py-md-5 py-4">
+    <div class="d-flex justify-content-center mt-3 mb-3">
+        <h3>Order History</h3>
+    </div>
+    <div class="container mb-3 mt-3">
+        <table class="table">
+            <thead class="table-dark">
+            <th>OrderID</th>
+            <th>Total Price</th>
+            <th>OrderDate</th>
+            <th>Address</th>
+            <th>Details</th>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.OrderID</td>
+                        <td>@item.TotalPrice</td>
+                        <td>@item.OrderDate</td>
+                        <td>@item.Address</td>
+                        <td>
+                            <span class="text-primary"><i class="fa-solid fa-pen-to-square"></i></span>@Html.ActionLink("Details", "Details", "History", new {id=item.OrderID}, new { @class = "" })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</section>
+
