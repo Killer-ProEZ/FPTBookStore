@@ -22,6 +22,24 @@ namespace FPTBookStore.Controllers
             var category = db.Categories.ToList();
             return View(category);
         }
+
+        [HttpPost]
+        public ActionResult Index(string searchstring)
+        {
+            if (Session["Admin"] == null)
+            {
+                Session["UserName"] = null;
+                return RedirectToAction("Login", "Home");
+            }
+            List<Category> data = new List<Category>();
+            data = db.Categories.Where(x => x.CategoryName.ToLower().Contains(searchstring.ToLower())).ToList();
+            if (data == null)
+            {
+                return HttpNotFound();
+            }
+            return View(data);
+        }
+
         public ActionResult Create()
         {
             if (Session["Admin"] == null)

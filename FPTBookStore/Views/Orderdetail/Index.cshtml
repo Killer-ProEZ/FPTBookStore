@@ -13,22 +13,15 @@
     </div>
 
     <h2>Orderdeatils</h2>
-    <div class="add-block  mt-2">
-        <div class="d-flex justify-content-between mb-2">
-            <form>
-                <div class="d-flex justify-content-between">
-                    <input class="form-control mr-2" type="text">
-                    <input type="submit" value="Search" class="btn btn-primary">
-                </div>
-            </form>
-        </div>
-    </div>
     <div class="table-responsive mt-2">
         <table class="table table-striped table-sm">
             <thead>
                 <tr>
                     <th scope="col">OrderdetailID</th>
                     <th scope="col">Price</th>
+                    <th scope="col">Quality</th>
+                    <th scope="col">OrderID</th>
+                    <th scope="col">BookID</th>
                     <th scope="col">Delete</th>
                 </tr>
             </thead>
@@ -38,6 +31,9 @@
                     <tr>
                         <td>@orderdetail.OrderdetailsID</td>
                         <td>@orderdetail.Price</td>
+                        <td>@orderdetail.Quality</td>
+                        <td>@orderdetail.OrderID</td>
+                        <td>@orderdetail.BookID</td>
                         <td><a onclick="return confirm('Are you sure ?')" href="@Url.Action("Delete","Orderdetail",new { id=orderdetail.OrderdetailsID})"><i class="fa-solid fa-trash-can"></i>Delete</a></td>
                     </tr>
                 }

@@ -27,7 +27,7 @@ namespace FPTBookStore.Controllers
             }
             var user = db.Accounts.ToList().Count();
             var books = db.Books.ToList().Count();
-            var bookdata = db.Books.ToList().OrderByDescending(x => x.BookID);
+            var bookdata = db.Books.ToList().OrderByDescending(x => x.Date_add);
             ViewBag.users = user;
             ViewBag.books = books;
             ViewBag.revenue = revenue;

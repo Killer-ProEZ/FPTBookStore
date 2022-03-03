@@ -13,6 +13,11 @@ namespace FPTBookStore.Controllers
         // GET: History
         public ActionResult Index()
         {
+            if (Session["UserName"] == null)
+            {
+                Session["infor"] = "You must login before ordering";
+                return RedirectToAction("Login", "Home");
+            }
             Session["Admin"] = null;
             var user = Session["UserName"].ToString();
             var order = db.Orders.Where(x => x.UserName == user).ToList();
@@ -20,6 +25,11 @@ namespace FPTBookStore.Controllers
         }
         public ActionResult Details(int? id)
         {
+            if (Session["UserName"] == null)
+            {
+                Session["infor"] = "You must login before ordering";
+                return RedirectToAction("Login", "Home");
+            }
             Session["Admin"] = null;
             var oderdetails = db.Orderdetails.Where(x => x.OrderID == id).ToList();
             return View(oderdetails);

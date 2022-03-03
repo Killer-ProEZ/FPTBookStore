@@ -26,6 +26,22 @@ namespace FPTBookStore.Controllers
             }
             return View(authors);
         }
+        [HttpPost]
+        public ActionResult Index(string searchstring)
+        {
+            if (Session["Admin"] == null)
+            {
+                Session["UserName"] = null;
+                return RedirectToAction("Login", "Home");
+            }
+            List<Author> data = new List<Author>();
+            data = db.Authors.Where(x => x.AuthorName.ToLower().Contains(searchstring.ToLower())).ToList();
+            if (data == null)
+            {
+                return HttpNotFound();
+            }
+            return View(data);
+        }
         public ActionResult Create()
         {
             if (Session["Admin"] == null)

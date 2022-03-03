@@ -72,6 +72,11 @@ namespace FPTBookStore.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Account account)
         {
+            List<int> number = new List<int>();
+            number.Add(0);
+            number.Add(1);
+            SelectList stateList = new SelectList(number);
+            ViewBag.stateList = stateList;
             if (ModelState.IsValid)
             {
                 if (account == null)
@@ -122,11 +127,14 @@ namespace FPTBookStore.Controllers
                 else
                 {
                     var reaccount = db.Accounts.Where(x => x.UserName == account.UserName).FirstOrDefault();
+                    if (account.Password != reaccount.Password)
+                    {
+                        reaccount.Password = GetMD5(account.Password);
+                        reaccount.RePassword = GetMD5(account.RePassword);
+                    }
                     reaccount.Fullname = account.Fullname;
                     reaccount.Email = account.Email;
                     reaccount.Address = account.Address;
-                    reaccount.Password = GetMD5(account.Password);
-                    reaccount.RePassword = GetMD5(account.RePassword);
                     reaccount.Tel = account.Tel;
                     reaccount.State = account.State;
                     db.SaveChanges();
