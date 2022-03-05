@@ -10,7 +10,6 @@ namespace FPTBookStore.Controllers
 {
     public class AuthorController : Controller
     {
-        // GET: Author
         private MyApplicationDBContext db = new MyApplicationDBContext();
         public ActionResult Index()
         {
