@@ -7,13 +7,13 @@ namespace FPTBookStore.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class _15 : IMigrationMetadata
+    public sealed partial class _18 : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(_15));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(_18));
         
         string IMigrationMetadata.Id
         {
-            get { return "202202271022105_15"; }
+            get { return "202203061125504_18"; }
         }
         
         string IMigrationMetadata.Source

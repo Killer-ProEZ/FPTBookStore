@@ -30,7 +30,7 @@ namespace FPTBookStore.Controllers
             {
                 sum += item.Quality * item.Book.Price;
                 quanlity += item.Quality;
-                ViewBag.Sum = sum;
+                Session["Money"] = sum;
             }
             Session["Quality"] = quanlity;
             return View(list);
@@ -128,8 +128,12 @@ namespace FPTBookStore.Controllers
             return RedirectToAction("Index");
         }
         [HttpPost]
-        public ActionResult Order(int total)
+        public ActionResult Order(string total)
         {
+            if (Session["Error"] != null)
+            {
+                return RedirectToAction("Index","Cart");
+            }
             if (Session["UserName"] == null)
             {
                 Session["infor"] = "You must login before ordering";
@@ -141,15 +145,15 @@ namespace FPTBookStore.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.Money = total;
             return View(account);
         }
         [HttpPost]
-        public ActionResult Confirm(string fullname, int tel, int money, string address)
+        public ActionResult Confirm(string fullname, int tel, string money, string address)
         {
+            int total = Convert.ToInt32(Session["Money"]);
             Order order = new Order();
             order.OrderDate = DateTime.Now;
-            order.TotalPrice = money;
+            order.TotalPrice = total;
             var user = Session["UserName"].ToString();
             order.UserName = user;
             order.Address = address;

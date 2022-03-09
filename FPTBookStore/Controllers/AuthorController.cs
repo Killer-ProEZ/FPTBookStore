@@ -111,7 +111,7 @@ namespace FPTBookStore.Controllers
                     return RedirectToAction("Index");
                 }
             }
-            return View("Edit");
+            return View(author);
         }
         public ActionResult Delete(int? id)
         {

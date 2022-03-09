@@ -27,7 +27,9 @@ namespace FPTBookStore.Models
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
         [Required]
-        public int Tel { get; set; }
+        [DataType(DataType.PhoneNumber)]
+        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Not a valid phone number")]
+        public string Tel { get; set; }
         [Required]
         public string Address { get; set; }
         [Required]

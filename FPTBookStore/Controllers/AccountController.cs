@@ -125,7 +125,7 @@ namespace FPTBookStore.Controllers
                     return HttpNotFound();
                 }
                 else
-                {
+                { 
                     var reaccount = db.Accounts.Where(x => x.UserName == account.UserName).FirstOrDefault();
                     if (account.Password != reaccount.Password)
                     {
@@ -141,7 +141,20 @@ namespace FPTBookStore.Controllers
                     return RedirectToAction("Index");
                 }
             }
-            return View("Edit");
+            List<int> number = new List<int>();
+            if (account.State == 0)
+            {
+                number.Add(0);
+                number.Add(1);
+            }
+            else
+            {
+                number.Add(1);
+                number.Add(0);
+            }
+            SelectList stateList = new SelectList(number);
+            ViewBag.stateList = stateList;
+            return View(account);
         }
 
         public ActionResult Delete(string username)

@@ -3,7 +3,7 @@ namespace FPTBookStore.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class _15 : DbMigration
+    public partial class _18 : DbMigration
     {
         public override void Up()
         {
@@ -16,7 +16,7 @@ namespace FPTBookStore.Migrations
                         Password = c.String(nullable: false, maxLength: 1000),
                         RePassword = c.String(nullable: false, maxLength: 1000),
                         Email = c.String(nullable: false),
-                        Tel = c.Int(nullable: false),
+                        Tel = c.String(nullable: false),
                         Address = c.String(nullable: false),
                         State = c.Int(nullable: false),
                     })

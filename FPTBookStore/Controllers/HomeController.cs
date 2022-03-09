@@ -207,7 +207,7 @@ namespace FPTBookStore.Controllers
                 }
                 return RedirectToAction("Index");
             }
-            return View("Edit");
+            return View(account);
         }
     }
 }
