@@ -57,7 +57,7 @@
                                         }
                                     }
                                 </td>
-                                <td><input readonly width="70px" type="text" value="@price"></td>
+                                <td><input readonly width="70px" type="text" value="$ @price"></td>
                                 <td align="center"><a onclick="return confirm('Are you sure ?')" href="@Url.Action("Delete","Cart",new { id=item.ProductID})"><i class="far fa-trash-alt"></i></a></td>
                             </tr>
                         }
@@ -68,7 +68,7 @@
                         <div class="form-group row total">
                             <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Total </label>
                             <div class="col-sm-10">
-                                <input type="number" class="form-control form-control-sm" name="total" id="total" readonly value="@ViewBag.Sum">
+                                <input type="text" class="form-control form-control-sm" name="total" id="total" readonly value="$ @Session["Money"]">
                             </div>
                         </div>
                         <div align="center">

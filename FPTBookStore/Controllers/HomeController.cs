@@ -205,7 +205,7 @@ namespace FPTBookStore.Controllers
                     return RedirectToAction("Index");
                     Session["Profile"] = "Profile";
                 }
-                return RedirectToAction("Index");
+                return View(reaccount);
             }
             return View(account);
         }

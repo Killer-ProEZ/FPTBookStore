@@ -82,6 +82,17 @@ namespace FPTBookStore.Controllers
                 string pic = System.IO.Path.GetFileName(file.FileName);
                 if (file != null)
                 {
+                    var postedFileExtension = Path.GetExtension(file.FileName);
+                    if (!string.Equals(postedFileExtension, ".jpg", StringComparison.OrdinalIgnoreCase)
+                        && !string.Equals(postedFileExtension, ".png", StringComparison.OrdinalIgnoreCase)
+                        && !string.Equals(postedFileExtension, ".gif", StringComparison.OrdinalIgnoreCase)
+                        && !string.Equals(postedFileExtension, ".jpeg", StringComparison.OrdinalIgnoreCase))
+                    {
+                        ViewBag.AuthorID = new SelectList(db.Authors, "AuthorID", "AuthorName", book.AuthorID);
+                        ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName", book.CategoryID);
+                        ViewBag.File = "Error file type";
+                        return View();
+                    }
                     string path = Path.Combine(Server.MapPath("~/Content/images/"), Path.GetFileName(file.FileName));
                     file.SaveAs(path);
                     book.Img = pic.ToString();
@@ -155,6 +166,17 @@ namespace FPTBookStore.Controllers
             }
             if (file != null)
             {
+                var postedFileExtension = Path.GetExtension(file.FileName);
+                if (!string.Equals(postedFileExtension, ".jpg", StringComparison.OrdinalIgnoreCase)
+                    && !string.Equals(postedFileExtension, ".png", StringComparison.OrdinalIgnoreCase)
+                    && !string.Equals(postedFileExtension, ".gif", StringComparison.OrdinalIgnoreCase)
+                    && !string.Equals(postedFileExtension, ".jpeg", StringComparison.OrdinalIgnoreCase))
+                {
+                    ViewBag.AuthorID = new SelectList(db.Authors, "AuthorID", "AuthorName", book.AuthorID);
+                    ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName", book.CategoryID);
+                    ViewBag.File = "Error file type";
+                    return View(book); 
+                }
                 string file_name = book.Img;
                 string path1 = Server.MapPath("~/Content/images/");
                 FileInfo file1 = new FileInfo(path1 + file_name);
