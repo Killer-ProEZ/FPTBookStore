@@ -45,7 +45,12 @@
                                         <div class="mb-3 row">
                                             <label for="inputPassword" class="col-sm-3 col-form-label">Address</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="address" name="address" value="@Model.Address">
+                                                <input type="text" class="form-control" id="address" name="address" value="@Model.Address" required>
+                                                @if (Session["Address"] != null)
+                                                {
+                                                    <p class="text-danger">@Session["Address"]</p>
+                                                    Session["Address"] = null;
+                                                }
                                             </div>
                                         </div>
                                         <div class="mb-3 row">

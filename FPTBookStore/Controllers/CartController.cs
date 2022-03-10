@@ -38,7 +38,6 @@ namespace FPTBookStore.Controllers
         public ActionResult AddCart(int? productid, int? quality)
         {
             var book = db.Books.Where(x => x.BookID == productid).FirstOrDefault(); ;
-            book.Stock -= 1;
             var cart = Session[CartSession];
             if (cart != null)
             {
@@ -127,6 +126,25 @@ namespace FPTBookStore.Controllers
             Session[CartSession] = list;
             return RedirectToAction("Index");
         }
+        public ActionResult Order()
+        {
+            if (Session["Error"] != null)
+            {
+                return RedirectToAction("Index", "Cart");
+            }
+            if (Session["UserName"] == null)
+            {
+                Session["infor"] = "You must login before ordering";
+                return RedirectToAction("Login", "Home");
+            }
+            string user = Session["UserName"].ToString();
+            var account = db.Accounts.Where(x => x.UserName == user).FirstOrDefault();
+            if (account == null)
+            {
+                return HttpNotFound();
+            }
+            return View(account);
+        }
         [HttpPost]
         public ActionResult Order(string total)
         {
@@ -150,11 +168,17 @@ namespace FPTBookStore.Controllers
         [HttpPost]
         public ActionResult Confirm(string fullname, int tel, string money, string address)
         {
+            var user = Session["UserName"].ToString();
+            var person = db.Accounts.Where(x => x.UserName == user).FirstOrDefault();
+            if (String.IsNullOrWhiteSpace(address))
+            {
+                Session["Address"] = "Address can't be empty";
+                return RedirectToAction("Order");
+            }
             int total = Convert.ToInt32(Session["Money"]);
             Order order = new Order();
             order.OrderDate = DateTime.Now;
             order.TotalPrice = total;
-            var user = Session["UserName"].ToString();
             order.UserName = user;
             order.Address = address;
             db.Orders.Add(order);
