@@ -42,7 +42,7 @@ namespace FPTBookStore.Controllers
         [HttpPost]
         public ActionResult Report(DateTime startday, DateTime endday)
         {
-            var order = db.Orders.Where(x => x.OrderDate > startday && x.OrderDate < endday);
+            var order = db.Orders.Where(x => x.OrderDate >= startday && x.OrderDate <= endday);
             var sum = 0;
             foreach (var item in order)
             {

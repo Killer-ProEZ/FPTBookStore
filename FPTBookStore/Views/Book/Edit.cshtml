@@ -32,7 +32,7 @@
             <div class="form-group mt-2">
                 @Html.LabelFor(model => model.Img, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-12">
-                    @Html.EditorFor(model => model.Img, new { htmlAttributes = new { @class = "form-control", @type="hidden"} })
+                    @Html.EditorFor(model => model.Img, new { htmlAttributes = new { @class = "form-control", @type = "hidden" } })
                     <input type="file" name="file" id="file" style="width: 100%;" class="form-control" />
                     @Html.ValidationMessageFor(model => model.Img, "", new { @class = "text-danger" })
                     <p class="text-danger">@ViewBag.File</p>
@@ -71,7 +71,7 @@
             <div class="form-group mt-2">
                 @Html.LabelFor(model => model.Date_add, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-12">
-                    @Html.EditorFor(model => model.Date_add, new { htmlAttributes = new { @class = "form-control"} })
+                    @Html.EditorFor(model => model.Date_add, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.Date_add, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -100,5 +100,7 @@
         </div>
     }
 </main>
-
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
 

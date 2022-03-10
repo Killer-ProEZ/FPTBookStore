@@ -202,8 +202,70 @@ namespace FPTBookStore.Controllers
                     reaccount.Email = account.Email;
                     reaccount.State = 0;
                     db.SaveChanges();
-                    return RedirectToAction("Index");
                     Session["Profile"] = "Profile";
+                }
+                return View(reaccount);
+            }
+            return View(account);
+        }
+        public ActionResult ChangePassword()
+        {
+            Session["Admin"] = null;
+            if (Session["No"] == null)
+            {
+                Session["infor"] = "You must re-enter before updating personal information";
+                TempData["No"] = 1;
+                return RedirectToAction("Login");
+            }
+            var user = Convert.ToString(Session["UserName"]);
+            var account = db.Accounts.FirstOrDefault(x => x.UserName.Equals(user));
+            if (account == null)
+            {
+                return HttpNotFound();
+            }
+            account.Password = null;
+            account.RePassword = null;
+            return View(account);
+        }
+        [HttpPost]
+        public ActionResult ChangePassword(Account account, string oldpass)
+        {
+            var user1 = Convert.ToString(Session["UserName"]);
+            var reaccount1 = db.Accounts.FirstOrDefault(x => x.UserName.Equals(user1));
+            if (String.IsNullOrWhiteSpace(oldpass))
+            {
+                ViewBag.oldpass = "Old password can't be empty";
+                return View(account);
+            }
+            else
+            {
+
+                if (oldpass.Length<6)
+                {
+                    ViewBag.oldpass = "Old Password length must be geater than 6";
+                    return View(account);
+                }
+                if (reaccount1.Password != GetMD5(oldpass))
+                {
+                    ViewBag.oldpass = "Passoword Error";
+                    return View(account);
+                }
+            }
+            if (ModelState.IsValid)
+            {
+                var user = Convert.ToString(Session["UserName"]);
+                var reaccount = db.Accounts.FirstOrDefault(x => x.UserName.Equals(user));
+                if (account == null)
+                {
+                    return HttpNotFound();
+                }
+                else
+                {
+                    reaccount.Password = GetMD5(account.Password);
+                    reaccount.RePassword = GetMD5(account.RePassword);
+                    db.SaveChanges();
+                    Session["Profile"] = "Profile";
+                    return RedirectToAction("Edit");
                 }
                 return View(reaccount);
             }

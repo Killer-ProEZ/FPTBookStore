@@ -214,7 +214,12 @@ namespace FPTBookStore.Controllers
         }
         public ActionResult Delete(int? id)
         {
-
+            var list = db.Orderdetails.Where(x => x.BookID == id).FirstOrDefault();
+            if (list != null)
+            {
+                Session["Delete"] = id;
+                return RedirectToAction("Index");
+            }
             if (Session["Admin"] == null)
             {
                 Session["UserName"] = null;

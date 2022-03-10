@@ -104,19 +104,35 @@
                                 </div>
                             </span>
                         </div>
-                        <div class="item-info-product">
-                            <h4>
-                                <a href="shop-single.html">@book.BookName </a>
-                            </h4>
-                            <div class="product_price row">
-                                <div class="col col-sm-8">
-                                    @Html.ActionLink("ADD", "AddCart", "Cart", new { productid = book.BookID, quality = 1 }, new { @class = "btn-add btn btn-info" })
-                                </div>
-                                <div class="col col-sm-4">
-                                    @Html.ActionLink("Details", "Details", new { id = book.BookID }, new { @class = "btn-details btn btn-info" })
+                        @if (book.Stock > 0)
+                        {
+                            <div class="item-info-product">
+                                <h4>
+                                    <a href="shop-single.html">@book.BookName </a>
+                                </h4>
+                                <div class="product_price row">
+                                    <div class="col col-sm-8">
+                                        @Html.ActionLink("ADD", "AddCart", "Cart", new { productid = book.BookID, quality = 1 }, new { @class = "btn-add btn btn-info" })
+                                    </div>
+                                    <div class="col col-sm-4">
+                                        @Html.ActionLink("Details", "Details", new { id = book.BookID }, new { @class = "btn-details btn btn-info" })
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        }
+                        else
+                        {
+                            <div class="item-info-product">
+                                <h4>
+                                    <a href="shop-single.html">@book.BookName </a>
+                                </h4>
+                                <div class="product_price row">
+                                    <div class="col col-sm-12">
+                                        <p class="text-danger">Out of stock</p>
+                                    </div>
+                                </div>
+                            </div>
+                        }
                     </div>
                 </div>
             }
