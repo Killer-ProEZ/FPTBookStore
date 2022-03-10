@@ -14,7 +14,7 @@
 
     <h2>Report</h2>
     <div class="container mb-3 mt-3">
-        @using (Html.BeginForm("Report","Admin"))
+        @using (Html.BeginForm("Report", "Admin"))
         {
             <div class="row">
                 <div class="col-sm-4">
@@ -45,4 +45,6 @@
         </div>
     </div>
 </main>
-
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

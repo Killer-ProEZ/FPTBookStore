@@ -35,6 +35,7 @@
                     @Html.EditorFor(model => model.Img, new { htmlAttributes = new { @class = "form-control", @type="hidden"} })
                     <input type="file" name="file" id="file" style="width: 100%;" class="form-control" />
                     @Html.ValidationMessageFor(model => model.Img, "", new { @class = "text-danger" })
+                    <p class="text-danger">@ViewBag.File</p>
                 </div>
                 <div class="col-md-6 ml-2">
                     <img style="max-width: 200px" src="~/Content/images/@Model.Img" class="img-thumbnail" alt="...">

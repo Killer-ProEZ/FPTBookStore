@@ -196,7 +196,7 @@ namespace FPTBookStore.Controllers
                         reaccount.Password = GetMD5(account.Password);
                         reaccount.RePassword = GetMD5(account.RePassword);
                     }
-                    reaccount.Address = account.Email;
+                    reaccount.Address = account.Address;
                     reaccount.Fullname = account.Fullname;
                     reaccount.Tel = account.Tel;
                     reaccount.Email = account.Email;
